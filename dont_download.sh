@@ -88,6 +88,7 @@ run_names_updater() {
     fi
     echo
     if [[ "${REBOOT_NEEDED}" == "true" ]] ; then
+        touch /tmp/ua_reboot_needed
         local REBOOT_PAUSE=10
         if [[ "${AUTOREBOOT}" == "true" ]] ; then
             echo "Rebooting in ${REBOOT_PAUSE} seconds"
