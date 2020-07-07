@@ -18,7 +18,7 @@ Special thanks to [Threepwood](https://github.com/ThreepwoodLeBrush) for his wor
 
 ## Warning
 
-This script will rewrite your current `names.txt` file if you have one already!
+This script will overwrite your current `names.txt` file if you have one already!
 
 
 
