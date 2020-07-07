@@ -112,6 +112,6 @@ read_ini_option() {
     fi 2> /dev/null
 }
 
-if [[ "${BASH_SOURCE[0]}" == "${0}" ]] ; then
+if [[ "${NAMES_TXT_UPDATER_SOURCE:-false}" != "true" ]] ; then
     run_names_updater
 fi
