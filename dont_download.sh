@@ -26,6 +26,8 @@ NAMES_REGION="US"
 NAMES_CHAR_CODE="CHAR18"
 NAMES_SORT_CODE="Common"
 AUTOREBOOT="true"
+CURL_RETRY="${CURL_RETRY:---connect-timeout 15 --max-time 60 --retry 3 --retry-delay 5 --silent --show-error}"
+SSL_SECURITY_OPTION="${SSL_SECURITY_OPTION:---insecure}"
 # ========= CODE STARTS HERE =========
 INI_PATH="$(pwd)/update_names-txt.ini"
 
@@ -47,6 +49,7 @@ run_names_updater() {
         read_ini_option "NAMES_CHAR_CODE" "${TMP}"
         read_ini_option "NAMES_SORT_CODE" "${TMP}"
         read_ini_option "AUTOREBOOT" "${TMP}"
+        read_ini_option "CURL_RETRY" "${TMP}"
         rm ${TMP}
     else
         echo "Not found."
