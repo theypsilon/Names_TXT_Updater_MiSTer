@@ -26,9 +26,11 @@ ALLOW_INSECURE_SSL="true"
 CURL_RETRY="--connect-timeout 15 --max-time 60 --retry 3 --retry-delay 5 --silent --show-error"
 # ========= CODE STARTS HERE =========
 
-ORIGINAL_SCRIPT_PATH="${0}"
-[[ "${ORIGINAL_SCRIPT_PATH}" == "bash" ]] && \
-	ORIGINAL_SCRIPT_PATH="$(ps -o comm,pid | awk -v PPID=${PPID} '$2 == PPID {print $1}')"
+if [[ "${0}" == "bash" ]] ; then
+    ORIGINAL_SCRIPT_PATH="$(ps -o comm,pid | awk -v PPID=${PPID} '$2 == PPID {print $1}')"
+else
+    ORIGINAL_SCRIPT_PATH="${0}"
+fi
 
 INI_PATH="${ORIGINAL_SCRIPT_PATH%.*}.ini"
 
