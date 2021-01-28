@@ -26,7 +26,12 @@ ALLOW_INSECURE_SSL="true"
 CURL_RETRY="--connect-timeout 15 --max-time 60 --retry 3 --retry-delay 5 --silent --show-error"
 # ========= CODE STARTS HERE =========
 
-INI_PATH="$(pwd)/update_names-txt.ini"
+ORIGINAL_SCRIPT_PATH="${0}"
+[[ "${ORIGINAL_SCRIPT_PATH}" == "bash" ]] && \
+	ORIGINAL_SCRIPT_PATH="$(ps -o comm,pid | awk -v PPID=${PPID} '$2 == PPID {print $1}')"
+
+INI_PATH="${ORIGINAL_SCRIPT_PATH%.*}.ini"
+
 if [ -f "${INI_PATH}" ] ; then
     TMP=$(mktemp)
     dos2unix < "${INI_PATH}" 2> /dev/null | grep -v "^exit" > ${TMP} || true
