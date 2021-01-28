@@ -29,12 +29,14 @@ AUTOREBOOT="true"
 CURL_RETRY="${CURL_RETRY:---connect-timeout 15 --max-time 60 --retry 3 --retry-delay 5 --silent --show-error}"
 SSL_SECURITY_OPTION="${SSL_SECURITY_OPTION:---insecure}"
 # ========= CODE STARTS HERE =========
-ORIGINAL_SCRIPT_PATH="$0"
-if [ "$ORIGINAL_SCRIPT_PATH" == "bash" ]
-then
-	ORIGINAL_SCRIPT_PATH=$(ps | grep "^ *$PPID " | grep -o "[^ ]*$")
+
+if [[ "${0}" == "bash" ]] ; then
+    ORIGINAL_SCRIPT_PATH="$(ps -o comm,pid | awk -v PPID=${PPID} '$2 == PPID {print $1}')"
+else
+    ORIGINAL_SCRIPT_PATH="${0}"
 fi
-INI_PATH=${ORIGINAL_SCRIPT_PATH%.*}.ini
+
+INI_PATH="${ORIGINAL_SCRIPT_PATH%.*}.ini"
 
 run_names_updater() {
 
