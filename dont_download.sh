@@ -29,7 +29,12 @@ AUTOREBOOT="true"
 CURL_RETRY="${CURL_RETRY:---connect-timeout 15 --max-time 60 --retry 3 --retry-delay 5 --silent --show-error}"
 SSL_SECURITY_OPTION="${SSL_SECURITY_OPTION:---insecure}"
 # ========= CODE STARTS HERE =========
-INI_PATH="$(pwd)/update_names-txt.ini"
+ORIGINAL_SCRIPT_PATH="$0"
+if [ "$ORIGINAL_SCRIPT_PATH" == "bash" ]
+then
+	ORIGINAL_SCRIPT_PATH=$(ps | grep "^ *$PPID " | grep -o "[^ ]*$")
+fi
+INI_PATH=${ORIGINAL_SCRIPT_PATH%.*}.ini
 
 run_names_updater() {
 
