@@ -31,7 +31,7 @@ SSL_SECURITY_OPTION="${SSL_SECURITY_OPTION:---insecure}"
 # ========= CODE STARTS HERE =========
 
 ORIGINAL_SCRIPT_PATH="${0}"
-if [[ "${ORIGINAL_SCRIPT_PATH}" == "bash" ]] ; then
+if [[ "${ORIGINAL_SCRIPT_PATH}" == "bash" ]] || [[ "${ORIGINAL_SCRIPT_PATH}" =~ ^/tmp/.*  ]]; then
     set +e
     ORIGINAL_SCRIPT_PATH=$(ps | grep "^ *$PPID " | grep -o "[^ ]*$")
     set -e
