@@ -30,10 +30,11 @@ CURL_RETRY="${CURL_RETRY:---connect-timeout 15 --max-time 60 --retry 3 --retry-d
 SSL_SECURITY_OPTION="${SSL_SECURITY_OPTION:---insecure}"
 # ========= CODE STARTS HERE =========
 
-if [[ "${0}" == "bash" ]] ; then
+ORIGINAL_SCRIPT_PATH="${0}"
+if [[ "${ORIGINAL_SCRIPT_PATH}" == "bash" ]] ; then
+    set +e
     ORIGINAL_SCRIPT_PATH=$(ps | grep "^ *$PPID " | grep -o "[^ ]*$")
-else
-    ORIGINAL_SCRIPT_PATH="${0}"
+    set -e
 fi
 
 INI_PATH="${ORIGINAL_SCRIPT_PATH%.*}.ini"
