@@ -31,7 +31,7 @@ SSL_SECURITY_OPTION="${SSL_SECURITY_OPTION:---insecure}"
 # ========= CODE STARTS HERE =========
 
 if [[ "${0}" == "bash" ]] ; then
-    ORIGINAL_SCRIPT_PATH="$(ps -o comm,pid | awk -v PPID=${PPID} '$2 == PPID {print $1}')"
+    ORIGINAL_SCRIPT_PATH=$(ps | grep "^ *$PPID " | grep -o "[^ ]*$")
 else
     ORIGINAL_SCRIPT_PATH="${0}"
 fi
